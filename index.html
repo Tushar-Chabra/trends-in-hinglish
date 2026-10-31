@@ -117,7 +117,7 @@ code{font:500 .82rem var(--mono);background:var(--code);border-radius:5px;paddin
 .empty{padding:18px;text-align:center;color:var(--muted)}
 .foot{font-size:.85rem;color:var(--muted);display:grid;gap:6px}
 .foot a{color:var(--accent)}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
 
 /* v3 additions */
 .hacts{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
@@ -191,6 +191,24 @@ a.rl{color:var(--accent);font-weight:800;text-decoration:underline;text-decorati
 .warnbox b{font-weight:800}
 details#gloss>summary{cursor:pointer;list-style:revert}
 @media print{.jump,.hacts,.acts,.chips,.tabbar,.toast,#intro{display:none!important}body{background:#fff!important;color:#000!important}.sk{box-shadow:none!important}.det{grid-template-rows:1fr!important}.det>.inner{overflow:visible!important}.row{break-inside:avoid;animation:none!important}}
+/* animations */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
+@keyframes shine{from{background-position:-200% 0}to{background-position:200% 0}}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.card:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--line)}
+.jump a:hover{transform:translateY(-2px) rotate(-1deg)}
+.jchip:hover{transform:translateY(-2px) rotate(-1deg)}
+.row:hover .pill{animation:floaty 1.6s ease-in-out infinite}
+.btn:active{transform:scale(.96)}
+.sugg-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.sugg-btns .btn:hover{transform:translate(-2px,-3px) rotate(-1deg);box-shadow:4px 4px 0 var(--line)}
+#suggest h2{display:inline-block;animation:wiggle 2.4s ease-in-out 1.2s 2}
+#suggest .btn.pri{background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.4) 50%,transparent 65%);background-size:200% 100%;animation:shine 3.2s linear infinite}
+.wrap>h1,.wrap>header{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.wrap [id]{scroll-margin-top:72px}
 </style>
 
 <div class="wrap"><noscript><p style="padding:16px">Ye page dekhne ke liye JavaScript on karein.</p></noscript>
@@ -223,6 +241,7 @@ details#gloss>summary{cursor:pointer;list-style:revert}
   <nav class="jump sk" aria-label="Page ke hisse">
     <a href="#summary" data-go="summary">Summary</a>
     <a href="#intro" data-go="intro">Pehli baar? Guide</a>
+    <a href="#suggest" data-go="suggest">Suggestion</a>
     <a href="#stars" data-go="stars">Stars race</a>
     <a href="#lists" data-go="lists">Top 10 lists</a>
     <a href="#gloss" data-go="gloss">Mushkil shabd</a>
@@ -267,7 +286,19 @@ details#gloss>summary{cursor:pointer;list-style:revert}
     <div class="list" id="list" role="tabpanel"></div>
   </section>
 
-  <details class="sk card" id="intro">
+  <section class="sk card" id="suggest" aria-label="Suggestion dein">
+    <h2>&#128161; Suggestion dein</h2>
+    <p class="kyun">Kyun: ye page aapke feedback se behtar banta hai. Kaunsi repo add ho, kya samajh nahi aaya, kya badalna chahiye, bas bata dein.</p>
+    <p style="font-size:1.05rem"><b>Please suggest karein with me on LinkedIn aur GitHub.</b></p>
+    <div class="sugg-btns">
+      <a class="btn pri" href="https://www.linkedin.com/in/tusharchhabraofficial/" target="_blank" rel="noopener noreferrer">&#128172; LinkedIn par suggest karein</a>
+      <a class="btn" href="https://github.com/Tushar-Chabra" target="_blank" rel="noopener noreferrer">&#128025; GitHub par suggest karein</a>
+    </div>
+    <p class="note" style="margin-top:10px">Is page ko banane wale: Tushar Chhabra. Dono jagah message ya follow karein.</p>
+  </section>
+
+  
+<details class="sk card" id="intro">
     <summary><h2 style="display:inline">Pehli baar aaye? 30 second ki guide (kholne ke liye click karein)</h2></summary>
     <ul class="take2" style="margin-top:12px">
       <li><b>GitHub kya hai?</b> Ek website jahan programmers apna banaya free software rakhte hain. Jo cheez bahut logon ko pasand aati hai, wo "trending" kehlati hai.</li>
@@ -302,6 +333,7 @@ details#gloss>summary{cursor:pointer;list-style:revert}
       <li>Software sirf official GitHub page se hi download karein.</li>
     </ol>
     <div><b>Zimmedari:</b> Kisi bhi repo ko install ya use karna aapka apna faisla hai. Isse hone wale kisi bhi nuksaan ya haani ki zimmedari is page ya iske banane wale ki nahi hai. Galti ho sakti hai.</div>
+    <div>Banane wale: Tushar Chhabra &middot; <a href="https://www.linkedin.com/in/tusharchhabraofficial/" target="_blank" rel="noopener noreferrer">LinkedIn</a> &middot; <a href="https://github.com/Tushar-Chabra" target="_blank" rel="noopener noreferrer">GitHub</a></div>
     <div>Ye page kisi company ya project se juda nahi hai. Isme koi tracking ya cookies nahi hain.</div>
     <div>Sources: <a href="https://trendshift.io" target="_blank" rel="noopener noreferrer">Trendshift Daily</a> · <a href="https://trendshift.io/weekly" target="_blank" rel="noopener noreferrer">Weekly</a> · <a href="https://trendshift.io/monthly" target="_blank" rel="noopener noreferrer">Monthly</a> · <a href="https://trendshift.io/yearly" target="_blank" rel="noopener noreferrer">Yearly</a> · har repo ka GitHub page</div>
   </footer>
@@ -337,7 +369,7 @@ const kNum=s=>{if(!s)return null;const m=/([\d.]+)(k?)/.exec(s);return m?parseFl
 const fmtK=n=>n>=1000?(n/1000).toFixed(n>=100000?0:1).replace(/\.0$/,"")+"k":String(Math.round(n));
 const short=id=>id.split("/")[1];
 const fitKey=id=>id.replace("/","__");
-const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduced=false;
 
 /* ---------- state ---------- */
 let cur="daily",onlyLap=false,catFilter=null,shareMode=false,priv=null;
@@ -534,6 +566,7 @@ function buildModel(){
         if((r.win||[]).concat(r.and||[]).some(s=>PIPE.test(s)))P("p","Chetawani (command): "+WARN_PIPE)}
     });
   });
+  P("h2","Suggestion dein");P("p","Please suggest karein with me on LinkedIn aur GitHub.");P("link","LinkedIn: https://www.linkedin.com/in/tusharchhabraofficial/","https://www.linkedin.com/in/tusharchhabraofficial/");P("link","GitHub: https://github.com/Tushar-Chabra","https://github.com/Tushar-Chabra");
   P("h2","Sources");[["Trendshift Daily","https://trendshift.io"],["Trendshift Weekly","https://trendshift.io/weekly"],["Trendshift Monthly","https://trendshift.io/monthly"],["Trendshift Yearly","https://trendshift.io/yearly"]].forEach(([t,u])=>P("link",t,u));
   return B;
 }
@@ -599,7 +632,7 @@ async function boot(){
   try{const h=location.hash.slice(1);if(L[h])cur=h}catch(e){}
   renderTake();
   document.querySelectorAll("[data-date]").forEach(e=>e.textContent=DATA_DATE);
-  drawCat();drawTabs();drawStars();drawList(true);
+  drawCat();drawTabs();drawStars();drawList(true);document.querySelectorAll(".wrap > section,.wrap > details,.wrap > footer,.grid2 > *").forEach((e,i)=>{e.classList.add("rv");e.style.transitionDelay=Math.min(i%4,3)*70+"ms"});if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.05});document.querySelectorAll(".rv").forEach(e=>io.observe(e))}else document.querySelectorAll(".rv").forEach(e=>e.classList.add("in"));
   const first=listEl.querySelector(".row");if(first)toggle(first,true);
   loadPriv();
 }
