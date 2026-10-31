@@ -190,7 +190,7 @@ a.rl{color:var(--accent);font-weight:800;text-decoration:underline;text-decorati
 .warnbox{padding:10px 14px;border-radius:10px 4px 12px 6px;border:1.5px solid currentColor;font-size:.92rem;line-height:1.45}
 .warnbox b{font-weight:800}
 details#gloss>summary{cursor:pointer;list-style:revert}
-@media print{.jump,.hacts,.acts,.chips,.tabbar,.toast,#intro,#top3{display:none!important}body{background:#fff!important;color:#000!important}.sk{box-shadow:none!important}.det{grid-template-rows:1fr!important}.det>.inner{overflow:visible!important}.row{break-inside:avoid;animation:none!important}}
+@media print{.jump,.hacts,.acts,.chips,.tabbar,.toast,#intro{display:none!important}body{background:#fff!important;color:#000!important}.sk{box-shadow:none!important}.det{grid-template-rows:1fr!important}.det>.inner{overflow:visible!important}.row{break-inside:avoid;animation:none!important}}
 </style>
 
 <div class="wrap"><noscript><p style="padding:16px">Ye page dekhne ke liye JavaScript on karein.</p></noscript>
@@ -221,8 +221,8 @@ details#gloss>summary{cursor:pointer;list-style:revert}
   </header>
 
   <nav class="jump sk" aria-label="Page ke hisse">
-    <a href="#top3" data-go="top3">Top 3</a>
     <a href="#summary" data-go="summary">Summary</a>
+    <a href="#intro" data-go="intro">Pehli baar? Guide</a>
     <a href="#stars" data-go="stars">Stars race</a>
     <a href="#lists" data-go="lists">Top 10 lists</a>
     <a href="#gloss" data-go="gloss">Mushkil shabd</a>
@@ -230,22 +230,6 @@ details#gloss>summary{cursor:pointer;list-style:revert}
   </nav>
 
   <section class="devs" id="devs" aria-label="Mere devices" hidden></section>
-
-  <section class="sk card" id="intro" aria-label="Pehle yahan se padhein">
-    <h2>Pehle ye padhein (30 second)</h2>
-    <ul class="take2">
-      <li><b>GitHub kya hai?</b> Ek website jahan programmers apna banaya free software rakhte hain. Jo cheez bahut logon ko pasand aati hai, wo "trending" kehlati hai.</li>
-      <li><b>Star (&#9733;) ka matlab?</b> Jaise YouTube ka like. Jitne zyada stars, utne zyada logon ko pasand aayi.</li>
-      <li><b>Aapko kuch install karna zaroori nahi.</b> Ye page sirf batata hai ki duniya mein aaj kya naya chal raha hai.</li>
-      <li><b>Risk label:</b> Kam risk = aam taur par theek. Dhyaan dein = soch samajh kar. Zyada risk = jokhim bhara. <b>Trending ka matlab safe nahi hota.</b> Ye label sirf andaza hai, guarantee nahi.</li>
-    </ul>
-  </section>
-
-  <section class="sk card" id="top3" aria-label="Aaj ke top 3">
-    <h2>Aaj ke Top 3</h2>
-    <p class="kyun">Kyun dekhein: sabse pehle yehi 3 cheezein dekhein. Baaki sab detail neeche hai. Kisi par click karein.</p>
-    <div class="top3" id="top3list"></div>
-  </section>
 
   <section class="grid2" id="summary" aria-label="Aaj ka trend summary">
     <div class="sk card">
@@ -278,9 +262,20 @@ details#gloss>summary{cursor:pointer;list-style:revert}
 
   <section aria-label="Top 10 list">
     <p class="note" style="margin:0">Har repo ke paas wala chhota gol chart = us repo mein kaunsi programming language kitne % hai. Card par click karein, poori jaankari khulegi ✎</p>
+    <input type="search" id="qbox" placeholder="Repo dhoondhein: naam ya kaam likhein (jaise: design, game, phone)" aria-label="Repo dhoondhein" style="width:100%;margin-top:10px;padding:.55rem .8rem;font:inherit;color:inherit;background:var(--paper);border:2px solid var(--line);border-radius:10px 4px 12px 6px">
     <div class="chips" id="jumpChips"></div>
     <div class="list" id="list" role="tabpanel"></div>
   </section>
+
+  <details class="sk card" id="intro">
+    <summary><h2 style="display:inline">Pehli baar aaye? 30 second ki guide (kholne ke liye click karein)</h2></summary>
+    <ul class="take2" style="margin-top:12px">
+      <li><b>GitHub kya hai?</b> Ek website jahan programmers apna banaya free software rakhte hain. Jo cheez bahut logon ko pasand aati hai, wo "trending" kehlati hai.</li>
+      <li><b>Star (&#9733;) ka matlab?</b> Jaise YouTube ka like. Jitne zyada stars, utne zyada logon ko pasand aayi.</li>
+      <li><b>Aapko kuch install karna zaroori nahi.</b> Ye page sirf batata hai ki duniya mein aaj kya naya chal raha hai.</li>
+      <li><b>Risk label:</b> Kam risk = aam taur par theek. Dhyaan dein = soch samajh kar. Zyada risk = jokhim bhara. <b>Trending ka matlab safe nahi hota.</b> Ye label sirf andaza hai, guarantee nahi.</li>
+    </ul>
+  </details>
 
   <details class="sk card" id="gloss">
     <summary><h2 style="display:inline">Mushkil shabdon ka matlab</h2></summary>
@@ -387,10 +382,6 @@ function drawCat(){
 function setCat(k){catFilter=catFilter===k?null:k;drawCat();const ch=$("catChip");ch.hidden=!catFilter;if(catFilter)ch.innerHTML=`Filter: ${esc(THEMES[catFilter].n)} <span aria-hidden="true">✕</span>`;drawList(true)}
 $("catChip").onclick=()=>setCat(catFilter);
 
-/* ---------- top 3 ---------- */
-const first1=s=>{const m=String(s).split(/(?<=[.!?])\s/)[0];return m.length>170?m.slice(0,167)+"…":m};
-function drawTop3(){const rows=L.daily.rows.slice(0,3);
- $("top3list").innerHTML=rows.map(([id,st],i)=>{const r=R[id];return `<button type="button" class="t3" data-open="${esc(id)}"><span class="t3n">${i+1}</span><span class="t3b"><b>${esc(short(id))}</b><span class="one">${esc(first1(r.kya))}</span></span><span class="pill r-${r.r}">${RL[r.r]}</span></button>`}).join("")}
 /* ---------- signals ---------- */
 function renderTake(){$("take").innerHTML=TAKE.map(t=>`<li>${linkify(t)}</li>`).join("")}
 
@@ -417,7 +408,10 @@ function drawStars(){
 /* ---------- list ---------- */
 const listEl=$("list"),fltBtn=$("fltBtn");
 fltBtn.onclick=()=>{onlyLap=!onlyLap;fltBtn.setAttribute("aria-pressed",onlyLap);drawList(true)};
-function visibleRows(){return L[cur].rows.map((r,i)=>[...r,i]).filter(([id])=>(!catFilter||R[id].t===catFilter)&&(!onlyLap||!devVisible()||(fitOf(id)&&fitOf(id).lap[0]!=="no")))}
+let qtxt="";const hay=id=>(id+" "+R[id].kya+" "+R[id].type+" "+R[id].job+" "+R[id].kahan).toLowerCase();
+function visibleRows(){return L[cur].rows.map((r,i)=>[...r,i]).filter(([id])=>(!qtxt||hay(id).includes(qtxt))&&(!catFilter||R[id].t===catFilter)&&(!onlyLap||!devVisible()||(fitOf(id)&&fitOf(id).lap[0]!=="no")))}
+document.addEventListener("input",e=>{if(e.target.id==="qbox"){qtxt=e.target.value.trim().toLowerCase();drawList(false)}});
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest('[data-go="intro"]');if(a){const d=document.getElementById("intro");if(d)d.open=true}});
 function drawList(anim){
   const rows=visibleRows();
   $("jumpChips").innerHTML=rows.map(([id,,i])=>`<button type="button" class="jchip" data-open="${esc(id)}"><b>#${i+1}</b>${esc(short(id))}</button>`).join("");
@@ -605,7 +599,7 @@ async function boot(){
   try{const h=location.hash.slice(1);if(L[h])cur=h}catch(e){}
   renderTake();
   document.querySelectorAll("[data-date]").forEach(e=>e.textContent=DATA_DATE);
-  drawTop3();drawCat();drawTabs();drawStars();drawList(true);
+  drawCat();drawTabs();drawStars();drawList(true);
   const first=listEl.querySelector(".row");if(first)toggle(first,true);
   loadPriv();
 }
